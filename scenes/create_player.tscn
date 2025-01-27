@@ -1,0 +1,148 @@
+[gd_scene load_steps=11 format=3 uid="uid://b17kffupxhkqr"]
+
+[ext_resource type="Script" path="res://scripts/create_player.gd" id="1_5rn7m"]
+[ext_resource type="Texture2D" uid="uid://bitj45m11pwdn" path="res://assets/green.png" id="1_6qffl"]
+[ext_resource type="Texture2D" uid="uid://cttm8bv00n403" path="res://assets/blue.png" id="2_5nutq"]
+[ext_resource type="Texture2D" uid="uid://s5d54fgfj5ni" path="res://assets/purple.png" id="3_ngxnh"]
+[ext_resource type="Texture2D" uid="uid://bk26gof3n88pj" path="res://assets/yellow.png" id="4_vbvi4"]
+[ext_resource type="Texture2D" uid="uid://dxl7jonaqervp" path="res://assets/red.png" id="5_m8l3n"]
+[ext_resource type="Texture2D" uid="uid://l75afngcwn0h" path="res://assets/white.png" id="6_u7wk1"]
+[ext_resource type="Texture2D" uid="uid://djygeres4567k" path="res://assets/orange.png" id="7_stdoe"]
+[ext_resource type="Texture2D" uid="uid://ny53mclk21us" path="res://assets/light_blue.png" id="8_a2l2r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5v1i8"]
+bg_color = Color(0.828644, 0.836592, 0.621848, 1)
+
+[node name="CreatePlayer" type="Node2D"]
+script = ExtResource("1_5rn7m")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 438.0
+offset_bottom = 180.0
+
+[node name="NameLabel" type="Label" parent="Panel"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 0
+offset_left = 35.0
+offset_top = 27.0
+offset_right = 116.0
+offset_bottom = 65.0
+text = "Name:"
+vertical_alignment = 1
+
+[node name="NameLine" type="LineEdit" parent="Panel"]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 30.0
+offset_right = 423.0
+offset_bottom = 61.0
+placeholder_text = "...."
+alignment = 1
+
+[node name="PlayerSelectLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 75.0
+offset_right = 139.0
+offset_bottom = 140.0
+text = "Select Player:"
+vertical_alignment = 1
+
+[node name="GreenPlayerButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 171.0
+offset_top = 71.0
+offset_right = 212.0
+offset_bottom = 120.0
+theme_override_styles/focus = SubResource("StyleBoxFlat_5v1i8")
+icon = ExtResource("1_6qffl")
+flat = true
+expand_icon = true
+
+[node name="BluePlayerButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 71.0
+offset_right = 260.0
+offset_bottom = 120.0
+icon = ExtResource("2_5nutq")
+flat = true
+expand_icon = true
+
+[node name="PurplePlayerButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 267.0
+offset_top = 130.0
+offset_right = 308.0
+offset_bottom = 179.0
+icon = ExtResource("3_ngxnh")
+flat = true
+expand_icon = true
+
+[node name="YellowPlayerButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 130.0
+offset_right = 260.0
+offset_bottom = 179.0
+icon = ExtResource("4_vbvi4")
+flat = true
+expand_icon = true
+
+[node name="RedPlayerButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 169.0
+offset_top = 130.0
+offset_right = 210.0
+offset_bottom = 179.0
+icon = ExtResource("5_m8l3n")
+flat = true
+expand_icon = true
+
+[node name="WhitePlayerButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 130.0
+offset_right = 356.0
+offset_bottom = 179.0
+icon = ExtResource("6_u7wk1")
+flat = true
+expand_icon = true
+
+[node name="OrangePlayerButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 71.0
+offset_right = 356.0
+offset_bottom = 120.0
+icon = ExtResource("7_stdoe")
+flat = true
+expand_icon = true
+
+[node name="LightBluePlayerButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 267.0
+offset_top = 71.0
+offset_right = 308.0
+offset_bottom = 120.0
+icon = ExtResource("8_a2l2r")
+flat = true
+expand_icon = true
+
+[node name="LockButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 103.0
+offset_right = 430.0
+offset_bottom = 154.0
+text = "Lock"
+
+[connection signal="pressed" from="Panel/GreenPlayerButton" to="." method="_on_green_player_button_pressed"]
+[connection signal="pressed" from="Panel/BluePlayerButton" to="." method="_on_blue_player_button_pressed"]
+[connection signal="pressed" from="Panel/PurplePlayerButton" to="." method="_on_purple_player_button_pressed"]
+[connection signal="pressed" from="Panel/YellowPlayerButton" to="." method="_on_yellow_player_button_pressed"]
+[connection signal="pressed" from="Panel/RedPlayerButton" to="." method="_on_red_player_button_pressed"]
+[connection signal="pressed" from="Panel/WhitePlayerButton" to="." method="_on_white_player_button_pressed"]
+[connection signal="pressed" from="Panel/OrangePlayerButton" to="." method="_on_orange_player_button_pressed"]
+[connection signal="pressed" from="Panel/LightBluePlayerButton" to="." method="_on_light_blue_player_button_pressed"]
+[connection signal="pressed" from="Panel/LockButton" to="." method="_on_lock_button_pressed"]

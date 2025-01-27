@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://buama3fol0eb6"]
+
+[ext_resource type="PackedScene" uid="uid://d3ev876e5fbof" path="res://scenes/health_board.tscn" id="1_2f02m"]
+[ext_resource type="Script" path="res://scripts/play_scene.gd" id="1_uvvkh"]
+
+[node name="PlayScene" type="Node2D"]
+script = ExtResource("1_uvvkh")
+
+[node name="DamageBoard" parent="." instance=ExtResource("1_2f02m")]
+offset_left = 19.0
+offset_top = 11.0
+offset_right = 58.0
+offset_bottom = 42.0

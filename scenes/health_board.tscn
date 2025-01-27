@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3ev876e5fbof"]
+
+[ext_resource type="Script" path="res://scripts/health_board.gd" id="1_5jjul"]
+
+[node name="DamageBoard" type="HBoxContainer"]
+theme_override_constants/separation = 21
+script = ExtResource("1_5jjul")
+
+[node name="DamageEntries" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="CollapseButton" type="Button" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+text = "<
+"
+
+[connection signal="pressed" from="CollapseButton" to="." method="_on_button_pressed"]

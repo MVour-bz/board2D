@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsnxmmry3mumr"]
+
+[ext_resource type="Script" path="res://scripts/dmg_entry_panel.gd" id="1_rwdgl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tayei"]
+
+[node name="DmgEntryPanel" type="PanelContainer"]
+clip_contents = true
+offset_right = 196.0
+offset_bottom = 17.0
+size_flags_horizontal = 3
+script = ExtResource("1_rwdgl")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tayei")
+
+[node name="GridContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="No" type="Label" parent="GridContainer"]
+custom_minimum_size = Vector2(20, 12)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 10
+text = "14"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DmgBoardEntryPlayers" type="HBoxContainer" parent="GridContainer"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="GridContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="Names" type="Label" parent="GridContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+text = "M, S, T"
+horizontal_alignment = 2
+uppercase = true

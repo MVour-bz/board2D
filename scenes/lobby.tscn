@@ -1,0 +1,115 @@
+[gd_scene load_steps=5 format=3 uid="uid://0bb1smwkkxom"]
+
+[ext_resource type="PackedScene" uid="uid://b17kffupxhkqr" path="res://scenes/create_player.tscn" id="1_4nsor"]
+[ext_resource type="Script" path="res://scripts/lobby.gd" id="1_mvn21"]
+[ext_resource type="PackedScene" uid="uid://bju0vyee4sfvs" path="res://scenes/question_mark_sprite.tscn" id="3_k5xar"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2byoh"]
+bg_color = Color(0.426789, 0.542601, 0.901927, 1)
+
+[node name="Lobby" type="Node2D"]
+script = ExtResource("1_mvn21")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_left = 757.0
+offset_top = 79.0
+offset_right = 1311.0
+offset_bottom = 200.0
+size_flags_vertical = 3
+theme_override_constants/h_separation = 40
+columns = 2
+
+[node name="LobbyIdLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Lobby:"
+
+[node name="LobbyId" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Random Id"
+
+[node name="PlayersInLobbyLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = "Pl in Lobby:"
+
+[node name="PlayerInLobby" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "3"
+
+[node name="CreatePlayer" parent="." instance=ExtResource("1_4nsor")]
+position = Vector2(568, 570)
+
+[node name="LobbyPanel" type="Panel" parent="."]
+offset_left = 567.0
+offset_top = 242.0
+offset_right = 1221.0
+offset_bottom = 478.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_2byoh")
+
+[node name="LobbyContainer" type="GridContainer" parent="LobbyPanel"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 19.0
+offset_right = -23.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 100
+theme_override_constants/v_separation = 100
+columns = 4
+
+[node name="QuestionMarkSprite" parent="LobbyPanel/LobbyContainer" instance=ExtResource("3_k5xar")]
+layout_mode = 2
+
+[node name="QuestionMarkSprite2" parent="LobbyPanel/LobbyContainer" instance=ExtResource("3_k5xar")]
+layout_mode = 2
+
+[node name="QuestionMarkSprite3" parent="LobbyPanel/LobbyContainer" instance=ExtResource("3_k5xar")]
+layout_mode = 2
+
+[node name="QuestionMarkSprite4" parent="LobbyPanel/LobbyContainer" instance=ExtResource("3_k5xar")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LobbyPanel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -156.0
+offset_top = -53.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "MIN 3 / MAX 8"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Back" type="Button" parent="."]
+offset_left = 569.0
+offset_top = 800.0
+offset_right = 693.0
+offset_bottom = 883.0
+theme_override_font_sizes/font_size = 40
+text = "Back"
+
+[node name="StartGameButton" type="Button" parent="."]
+offset_left = 885.0
+offset_top = 800.0
+offset_right = 1198.0
+offset_bottom = 899.0
+theme_override_font_sizes/font_size = 50
+text = "START GAME"
+
+[connection signal="pressed" from="Back" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="StartGameButton" to="." method="_on_start_game_pressed"]

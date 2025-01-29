@@ -1,4 +1,4 @@
-class_name MainMenu extends Node2D
+class_name MainMenu extends Control
 
 
 func _on_quit_button_pressed() -> void:
@@ -11,4 +11,4 @@ func _on_add_player_pressed() -> void:
 
 func _on_play_button_pressed() -> void:
 	SignalBus._new_game.emit()
-	self.hide()
+	#self.hide()

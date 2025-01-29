@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bxjqqvngj2p3i"]
+
+[node name="SideMenu" type="Node2D"]
+
+[node name="MenuButton" type="MenuButton" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -85.0
+offset_right = 82.0
+grow_vertical = 0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 30
+text = "s"
+item_count = 1
+popup/item_0/text = "Exit Game"

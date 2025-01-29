@@ -9,5 +9,39 @@ script = ExtResource("1_uvvkh")
 [node name="DamageBoard" parent="." instance=ExtResource("1_2f02m")]
 offset_left = 19.0
 offset_top = 11.0
-offset_right = 58.0
-offset_bottom = 42.0
+offset_right = 152.0
+offset_bottom = 154.0
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 513.0
+offset_top = 5.0
+offset_right = 1190.0
+offset_bottom = 62.0
+grow_horizontal = 2
+
+[node name="PlayerLabel" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 92.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 25
+text = "Player"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerInfo" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -546.0
+grow_horizontal = 0
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1

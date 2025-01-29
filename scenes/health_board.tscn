@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://scripts/health_board.gd" id="1_5jjul"]
 
 [node name="DamageBoard" type="HBoxContainer"]
+offset_right = 88.0
+offset_bottom = 88.0
 theme_override_constants/separation = 21
 script = ExtResource("1_5jjul")
 
@@ -12,6 +14,7 @@ layout_mode = 2
 [node name="CollapseButton" type="Button" parent="."]
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_font_sizes/font_size = 30
 text = "<
 "
 

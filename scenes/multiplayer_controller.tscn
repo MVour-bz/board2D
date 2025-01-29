@@ -1,0 +1,116 @@
+[gd_scene load_steps=3 format=3 uid="uid://da674sadmsatf"]
+
+[ext_resource type="Script" path="res://scenes/multiplayer_controller.gd" id="1_70yvx"]
+[ext_resource type="PackedScene" uid="uid://0bb1smwkkxom" path="res://scenes/lobby.tscn" id="2_3qkwm"]
+
+[node name="MultiplayerController" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_70yvx")
+
+[node name="MultiplayerMenuContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 704.0
+offset_top = 337.0
+offset_right = 1228.0
+offset_bottom = 571.0
+
+[node name="Host" type="Button" parent="MultiplayerMenuContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Host"
+
+[node name="HSeparator2" type="HSeparator" parent="MultiplayerMenuContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="Join" type="Button" parent="MultiplayerMenuContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Join
+"
+
+[node name="HSeparator" type="HSeparator" parent="MultiplayerMenuContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Back" type="Button" parent="MultiplayerMenuContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Back
+"
+
+[node name="Lobby" parent="." instance=ExtResource("2_3qkwm")]
+
+[node name="ConnectToLobby" type="Node2D" parent="."]
+
+[node name="Panel" type="Panel" parent="ConnectToLobby"]
+custom_minimum_size = Vector2(30, 30)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 494.0
+offset_top = 315.0
+offset_right = 1505.0
+offset_bottom = 742.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="ConnectToLobby/Panel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 13.0
+offset_top = -112.5
+offset_right = 349.0
+offset_bottom = -22.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Enter lobby ID"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="ConnectToLobby/Panel"]
+layout_mode = 0
+offset_left = 445.0
+offset_top = 103.0
+offset_right = 944.0
+offset_bottom = 194.0
+theme_override_font_sizes/font_size = 40
+placeholder_text = "....."
+alignment = 1
+
+[node name="ConnectLobbyButton" type="Button" parent="ConnectToLobby/Panel"]
+layout_mode = 0
+offset_left = 651.0
+offset_top = 293.0
+offset_right = 944.0
+offset_bottom = 388.0
+theme_override_font_sizes/font_size = 60
+text = "CONNECT"
+
+[node name="ReturnButton" type="Button" parent="ConnectToLobby/Panel"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 296.0
+offset_right = 275.0
+offset_bottom = 381.0
+theme_override_font_sizes/font_size = 40
+text = "BACK"
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="MultiplayerMenuContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="MultiplayerMenuContainer/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="MultiplayerMenuContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="ConnectToLobby/Panel/ConnectLobbyButton" to="." method="_on_connect_lobby_button_pressed"]

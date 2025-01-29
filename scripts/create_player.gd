@@ -2,65 +2,89 @@ class_name CreatePlayer extends Node2D
 @onready var name_line: LineEdit = $Panel/NameLine
 
 var color = ""
-@onready var green_player_button: Button = $Panel/GreenPlayerButton
-@onready var blue_player_button: Button = $Panel/BluePlayerButton
-@onready var purple_player_button: Button = $Panel/PurplePlayerButton
-@onready var yellow_player_button: Button = $Panel/YellowPlayerButton
-@onready var red_player_button: Button = $Panel/RedPlayerButton
-@onready var white_player_button: Button = $Panel/WhitePlayerButton
-@onready var orange_player_button: Button = $Panel/OrangePlayerButton
-@onready var light_blue_player_button: Button = $Panel/LightBluePlayerButton
+var buttons = {}
+var btn_scene : PackedScene = preload("res://scenes/select_player_icon_button.tscn")
+@onready var panel: Panel = $Panel
+@onready var avatar_container: GridContainer = $Panel/AvatarContainer
+#@onready var avatar_container: FlowContainer = $Panel/AvatarContainer
 
+
+
+
+func _ready():
+	SignalBus.connect("_new_game", _on_new_game)
+	pass
+
+
+func _process(delta: float) -> void:
+	check_valid_buttons()
+
+
+func _on_new_game():
+	reset_buttons()
+
+
+func reset_buttons():
+	remove_buttons()
+	create_buttons()
+	
+func remove_buttons():
+	for button in buttons:
+		buttons[button].queue_free()
+
+func create_buttons():
+	var all_pawns = Global.pawns
+	for pawn in all_pawns:
+		var new_btn = btn_scene.instantiate()
+		new_btn.color = all_pawns[pawn].color
+		new_btn.connect("toggled", _on_btn_pressed.bind(pawn))
+		new_btn.use_texture()
+		avatar_container.add_child(new_btn)
+		buttons[pawn] = new_btn
+
+
+func check_valid_buttons():
+	for btn in buttons:
+		if not Global.pawns[btn].available:
+			buttons[btn].disabled = true
+		else:
+			buttons[btn].disabled = false
+	
+	
+func _on_btn_pressed(toggled_on, btn_color):
+	if toggled_on:
+		release_prev_btn()
+		reserve_btn(btn_color)
+	else:
+		release_btn(btn_color)
+
+func reserve_btn(btn_color):
+	color = btn_color
+	Global.pawns[btn_color].availabe = false
+	Global.pawns[btn_color].player = Global.active_player
+	Global.active_player["pawn"] = btn_color
+	
+	SignalBus._avatar_reserved.emit(btn_color)
+
+
+func release_prev_btn():
+	var prev_btn_clr = color
+	if prev_btn_clr:
+		Global.pawns[prev_btn_clr].available = true
+		buttons[prev_btn_clr].button_pressed = false
+	
+	SignalBus._avatar_released.emit(prev_btn_clr)
+	
+func release_btn(btn_color)	:
+	Global.pawns[btn_color].available = true
+	SignalBus._avatar_released.emit(btn_color)
+	
+	
 
 
 func _on_lock_button_pressed() -> void:
 	#pass
-	SignalBus._lock_avatar.emit(name_line.text , color)
+	Global.active_player.name = name_line.text
+	Global.active_player.pawn = color # no need of r hits -->  its already set above inside the reserve btn
+	SignalBus._avatar_created.emit(name_line.text , color)
 	print("creating: " , name_line.text, " , ", color)
-
-
-func _on_green_player_button_pressed() -> void:
-	SignalBus._select_avatar.emit("green")
-	color = "green"
-
-
-func _on_blue_player_button_pressed() -> void:
-	SignalBus._select_avatar.emit("blue")
-	color = "blue"
-	pass # Replace with function body.
-
-
-func _on_purple_player_button_pressed() -> void:
-	SignalBus._select_avatar.emit("purple")
-	color = "purple"
-	pass # Replace with function body.
-
-
-func _on_yellow_player_button_pressed() -> void:
-	SignalBus._select_avatar.emit("yellow")
-	color = "yellow"
-	pass # Replace with function body.
-
-
-func _on_red_player_button_pressed() -> void:
-	SignalBus._select_avatar.emit("red")
-	color = "red"
-	pass # Replace with function body.
-
-
-func _on_white_player_button_pressed() -> void:
-	SignalBus._select_avatar.emit("white")
-	color = "white"
-	pass # Replace with function body.
-
-
-func _on_orange_player_button_pressed() -> void:
-	SignalBus._select_avatar.emit("orange")
-	color = "orange"
-	pass # Replace with function body.
-
-
-func _on_light_blue_player_button_pressed() -> void:
-	SignalBus._select_avatar.emit("light_blue")
-	color = "light_blue"
-	pass # Replace with function body.

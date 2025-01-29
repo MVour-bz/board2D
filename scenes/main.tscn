@@ -4,9 +4,9 @@
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_vyasj"]
 [ext_resource type="Texture2D" uid="uid://l4uldlv5ab60" path="res://assets/rain.png" id="2_dvpre"]
 [ext_resource type="Texture2D" uid="uid://bb6t0g8i8m05t" path="res://assets/rain_bf.png" id="3_35ae0"]
-[ext_resource type="PackedScene" uid="uid://buama3fol0eb6" path="res://scenes/play_scene.tscn" id="3_lfey7"]
 [ext_resource type="Texture2D" uid="uid://7c2bc3a67fv7" path="res://assets/mix_bf_op.png" id="4_i5hx0"]
-[ext_resource type="PackedScene" uid="uid://b17kffupxhkqr" path="res://scenes/create_player.tscn" id="4_sw603"]
+[ext_resource type="PackedScene" uid="uid://da674sadmsatf" path="res://scenes/multiplayer_controller.tscn" id="5_qihki"]
+[ext_resource type="PackedScene" uid="uid://bxjqqvngj2p3i" path="res://scenes/side_menu.tscn" id="5_snh2g"]
 [ext_resource type="PackedScene" uid="uid://r6rwa20wgurn" path="res://scenes/main_menu.tscn" id="6_yjbwe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6twgn"]
@@ -184,42 +184,63 @@ animations = [{
 [node name="Main" type="Node2D"]
 script = ExtResource("1_vyasj")
 
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-follow_viewport_enabled = true
 
 [node name="MainMenu" parent="CanvasLayer" instance=ExtResource("6_yjbwe")]
-position = Vector2(318, 193)
-
-[node name="PlayScene" parent="CanvasLayer" instance=ExtResource("3_lfey7")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="CanvasLayer"]
+visible = false
 
-[node name="CreatePlayer" parent="CanvasLayer" instance=ExtResource("4_sw603")]
-position = Vector2(78, 83)
+[node name="SideMenu" parent="CanvasLayer" instance=ExtResource("5_snh2g")]
+visible = false
+position = Vector2(3, 1081)
+
+[node name="MultiplayerController" parent="CanvasLayer" instance=ExtResource("5_qihki")]
+
+[node name="Camera2D" type="Camera2D" parent="CanvasLayer"]
+anchor_mode = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(94.7501, 126.875)
+position = Vector2(123, 676)
 scale = Vector2(3.64473, 3.90131)
 sprite_frames = SubResource("SpriteFrames_bpd5s")
 autoplay = "default"
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-position = Vector2(201, 278)
+position = Vector2(132, 455)
 scale = Vector2(3.67105, 3.69079)
 sprite_frames = SubResource("SpriteFrames_3yw84")
 autoplay = "default"
 
 [node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="."]
-position = Vector2(514.5, 272.562)
+position = Vector2(1540, 15)
 scale = Vector2(3.23685, 3.39802)
 sprite_frames = SubResource("SpriteFrames_d0muq")
 autoplay = "default"
 
 [node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="."]
-position = Vector2(482, 90)
+position = Vector2(1019, -170)
 scale = Vector2(3.43421, 3.84211)
 sprite_frames = SubResource("SpriteFrames_gdr62")
 autoplay = "default"
-
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0

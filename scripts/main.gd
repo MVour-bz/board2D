@@ -1,24 +1,42 @@
 extends Node2D
-@onready var dmg_board_sprite : PackedScene =  preload("res://scenes/player_dmg_board.tscn")
-@onready var create_player: Node2D = $CanvasLayer/CreatePlayer
 
-@onready var play_scene: PlayScene = $CanvasLayer/PlayScene
+@onready var dmg_board_sprite : PackedScene =  preload("res://scenes/player_dmg_board.tscn")
+@onready var multiplayer_controller: MultiplayerController = $CanvasLayer/MultiplayerController
+
+
+@onready var main_menu: MainMenu = $CanvasLayer/MainMenu
+
+
+@onready var play_scene_pack : PackedScene = preload("res://scenes/play_scene.tscn")
+var play_scene
 
 func _ready()->void :
 	SignalBus.connect("_exit_game", _on_exit_game)
 	SignalBus.connect("_add_player", _on_add_player)
 	SignalBus.connect("_new_game", _on_new_game)
-	
+	SignalBus.connect("_return_to_main_menu", _on_main_menu)
+	SignalBus.connect("_start_game", _on_start_game)
 	set_main_screen()
 
 
 func set_main_screen():
-	play_scene.hide()
-	create_player.hide()
+	main_menu.show()
+	multiplayer_controller.hide()
+	
+func _on_main_menu():
+	set_main_screen()
 
 func _on_new_game():
-	#play_scene.show()
-	create_player.show()
+	main_menu.hide()
+	multiplayer_controller.show()
+	
+	
+func _on_start_game(id):
+	play_scene = play_scene_pack.instantiate()
+	add_child(play_scene)
+	main_menu.hide()
+	multiplayer_controller.hide()
+	#create_player.show()
 
 func _on_exit_game():
 	get_tree().quit()

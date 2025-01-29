@@ -3,7 +3,6 @@ class_name DmgEntryPanel extends PanelContainer
 var playerBoardScene : PackedScene = preload("res://scenes/player_dmg_board.tscn")
 
 @onready var dmg_board_entry_players: HBoxContainer = $GridContainer/DmgBoardEntryPlayers
-@onready var players: HBoxContainer = $GridContainer/Players
 
 @onready var names: Label = $GridContainer/Names
 @onready var no: Label = $GridContainer/No

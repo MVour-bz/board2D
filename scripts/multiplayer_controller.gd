@@ -1,10 +1,12 @@
 class_name MultiplayerController extends Control
 
 @onready var multiplayer_menu_container: VBoxContainer = $MultiplayerMenuContainer
-@onready var lobby: Lobby = $Lobby
+#@onready var lobby: Lobby = $Lobby
 @onready var line_edit: LineEdit = $ConnectToLobby/Panel/LineEdit
 @onready var connect_to_lobby: Node2D = $ConnectToLobby
 @onready var return_button: Button = $ConnectToLobby/Panel/ReturnButton
+@onready var lobby_scene : PackedScene = preload("res://scenes/lobby.tscn")
+var lobby : Lobby
 
 var peer
 var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".split("")
@@ -31,7 +33,9 @@ func _on_back_pressed() -> void:
 
 func _on_join_pressed() -> void:
 	connect_to_lobby.show()
-	lobby.hide()
+	if lobby:
+		lobby.queue_free()
+		lobby = null
 	multiplayer_menu_container.hide()
 	pass # Replace with function body.
 
@@ -40,27 +44,24 @@ func _on_host_pressed() -> void:
 	multiplayer_menu_container.hide()
 	connect_to_lobby.hide()
 	
-	lobby.show()
-	lobby.lobby_init(create_lobby_id())
 	
 	create_host()
 	pass # Replace with function body.
 
 
 func _on_connect_lobby_button_pressed() -> void:
-	var lobby_id = line_edit.text
-	connect_to_lobby.hide()
-	lobby.show()
-	lobby.lobby_init(lobby_id)
+	
 	create_client()
 	pass # Replace with function body.
 
 
 func _on_visibility_changed() -> void:
-	print("self.visible: " , self.visible)
+	#print("self.visible: " , self.visible)
 	if self.visible:
 		multiplayer_menu_container.show()
-		lobby.hide()
+		if lobby:
+			lobby.queue_free()
+			lobby = null
 		connect_to_lobby.hide()
 
 
@@ -108,8 +109,8 @@ func _on_peer_disconnected(id):
 func _on_connected_to_server():
 	print("Connected to Server!")
 	
-	Global.active_player.id = multiplayer.get_unique_id()
-	lobby.lobby_add_player.rpc_id(1, Global.active_player)
+	GameState.active_player.id = multiplayer.get_unique_id()
+	lobby.lobby_add_player.rpc_id(1, GameState.active_player)
 
 # only from the clients
 func _on_connecion_failed():
@@ -127,15 +128,33 @@ func create_host():
 	multiplayer.set_multiplayer_peer(peer)
 	print("Waiting For Players")
 	
-	Global.active_player.id = multiplayer.get_unique_id()
-	lobby.lobby_add_player(Global.active_player)
+	GameState.active_player.id = multiplayer.get_unique_id()
+	
+	
+	lobby = lobby_scene.instantiate()
+	add_child(lobby)
+	lobby.show()
+	lobby.lobby_init(create_lobby_id())
+	lobby.lobby_add_player(GameState.active_player)
 
 	
 func create_client():
 	peer = ENetMultiplayerPeer.new()
 	peer.create_client(address, port)
+
+
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
+	
+	GameState.active_player.id = multiplayer.get_unique_id()
+	
+	var lobby_id = line_edit.text
+	connect_to_lobby.hide()
+	if not lobby:
+		lobby = lobby_scene.instantiate()
+		add_child(lobby)
+		lobby.lobby_init(lobby_id)
+	
 	
 	
 	
@@ -148,3 +167,25 @@ func create_client():
 	
 func _on_start_game(id):
 	pass
+
+
+
+
+
+@rpc("any_peer")
+func update_player_info(player):
+	GameState.player[player.id] = player
+	if GameState.active_player.id == player.id:
+		GameState.active_player = player
+	
+	if multiplayer.is_server():
+		for pl in GameState.players:
+			update_player_info.rpc(player)
+
+
+@rpc("any_peer")
+func set_state(GAME_PHASE, players):
+	GameState.game_phase_status = GAME_PHASE
+	GameState.players = players
+	pass
+	

@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://da674sadmsatf"]
+[gd_scene load_steps=2 format=3 uid="uid://da674sadmsatf"]
 
-[ext_resource type="Script" path="res://scenes/multiplayer_controller.gd" id="1_70yvx"]
-[ext_resource type="PackedScene" uid="uid://0bb1smwkkxom" path="res://scenes/lobby.tscn" id="2_3qkwm"]
+[ext_resource type="Script" path="res://scripts/multiplayer_controller.gd" id="1_70yvx"]
 
 [node name="MultiplayerController" type="Control"]
 visible = false
@@ -45,8 +44,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Back
 "
-
-[node name="Lobby" parent="." instance=ExtResource("2_3qkwm")]
 
 [node name="ConnectToLobby" type="Node2D" parent="."]
 

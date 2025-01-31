@@ -12,8 +12,8 @@ func spawn_players(players):
 
 
 func _on_avatar_created(name, color):
-	print("mphke")
+	#print("mphke")
 	player_info.text = ""
-	for attr in Global.active_player:
-		if Global.active_player[attr] != "":
-			player_info.text += Global.active_player[attr] + " ~/~ "
+	for attr in GameState.active_player:
+		if GameState.active_player[attr] != "":
+			player_info.text += GameState.active_player[attr] + " ~/~ "

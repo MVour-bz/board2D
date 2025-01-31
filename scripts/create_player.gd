@@ -13,6 +13,7 @@ var btn_scene : PackedScene = preload("res://scenes/select_player_icon_button.ts
 
 func _ready():
 	SignalBus.connect("_new_game", _on_new_game)
+	reset_buttons()
 	pass
 
 
@@ -61,8 +62,8 @@ func _on_btn_pressed(toggled_on, btn_color):
 func reserve_btn(btn_color):
 	color = btn_color
 	Global.pawns[btn_color].availabe = false
-	Global.pawns[btn_color].player = Global.active_player
-	Global.active_player["pawn"] = btn_color
+	Global.pawns[btn_color].player = GameState.active_player
+	GameState.active_player["pawn"] = btn_color
 	
 	SignalBus._avatar_reserved.emit(btn_color)
 
@@ -84,7 +85,7 @@ func release_btn(btn_color)	:
 
 func _on_lock_button_pressed() -> void:
 	#pass
-	Global.active_player.name = name_line.text
-	Global.active_player.pawn = color # no need of r hits -->  its already set above inside the reserve btn
+	GameState.active_player.name = name_line.text
+	GameState.active_player.pawn = color # no need of r hits -->  its already set above inside the reserve btn
 	SignalBus._avatar_created.emit(name_line.text , color)
-	print("creating: " , name_line.text, " , ", color)
+	#print("creating: " , name_line.text, " , ", color)

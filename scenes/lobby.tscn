@@ -43,7 +43,7 @@ size_flags_vertical = 3
 text = "3"
 
 [node name="CreatePlayer" parent="." instance=ExtResource("1_4nsor")]
-position = Vector2(568, 570)
+position = Vector2(672, 555)
 
 [node name="LobbyPanel" type="Panel" parent="."]
 offset_left = 567.0

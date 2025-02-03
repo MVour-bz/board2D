@@ -2,13 +2,13 @@ class_name CreatePlayer extends Node2D
 @onready var name_line: LineEdit = $Panel/NameLine
 
 var color = ""
-var buttons = {}
+#var buttons = {}
 var btn_scene : PackedScene = preload("res://scenes/select_player_icon_button.tscn")
 @onready var panel: Panel = $Panel
 @onready var avatar_container: GridContainer = $Panel/AvatarContainer
 #@onready var avatar_container: FlowContainer = $Panel/AvatarContainer
 
-
+@export var buttons = {}
 
 
 func _ready():

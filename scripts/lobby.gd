@@ -23,7 +23,7 @@ func lobby_init(id : String):
 	lobbyId = id
 	lobby_id.text = id
 	
-	print("multiplayr is server: ", multiplayer.is_server(), " / ", multiplayer.get_unique_id())
+	print("multiplayer is server: ", multiplayer.is_server(), " / ", multiplayer.get_unique_id())
 	if not multiplayer.is_server():
 		start_game_button.hide()
 

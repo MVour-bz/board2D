@@ -1,7 +1,66 @@
-[gd_scene load_steps=3 format=3 uid="uid://buama3fol0eb6"]
+[gd_scene load_steps=11 format=3 uid="uid://buama3fol0eb6"]
 
 [ext_resource type="PackedScene" uid="uid://d3ev876e5fbof" path="res://scenes/health_board.tscn" id="1_2f02m"]
 [ext_resource type="Script" path="res://scripts/play_scene.gd" id="1_uvvkh"]
+[ext_resource type="Texture2D" uid="uid://7c2bc3a67fv7" path="res://assets/mix_bf_op.png" id="3_8w2fw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqq6g"]
+atlas = ExtResource("3_8w2fw")
+region = Rect2(0, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bs1hb"]
+atlas = ExtResource("3_8w2fw")
+region = Rect2(38, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0i5t"]
+atlas = ExtResource("3_8w2fw")
+region = Rect2(0, 38, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpdox"]
+atlas = ExtResource("3_8w2fw")
+region = Rect2(38, 38, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hvic"]
+atlas = ExtResource("3_8w2fw")
+region = Rect2(0, 76, 38, 38)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dv3dq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqq6g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bs1hb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0i5t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rpdox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3hvic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rpdox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0i5t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bs1hb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_myibe"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 10
+border_color = Color(0.792516, 0.223814, 0.452169, 1)
+border_blend = true
 
 [node name="PlayScene" type="Node2D"]
 script = ExtResource("1_uvvkh")
@@ -45,3 +104,68 @@ grow_horizontal = 0
 grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PlayerHud" type="Panel" parent="."]
+custom_minimum_size = Vector2(50, 50)
+offset_left = 361.0
+offset_top = 733.0
+offset_right = 1528.0
+offset_bottom = 990.0
+
+[node name="Panel" type="AnimatedSprite2D" parent="PlayerHud"]
+position = Vector2(136.875, 130.375)
+scale = Vector2(5.26974, 5.55921)
+sprite_frames = SubResource("SpriteFrames_dv3dq")
+autoplay = "default"
+frame_progress = 0.404009
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerHud"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.239075
+anchor_top = 0.0622568
+anchor_right = 0.718081
+anchor_bottom = 1.11284
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayerName" type="Label" parent="PlayerHud/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_myibe")
+text = "Name"
+
+[node name="PlayerScpecies" type="Label" parent="PlayerHud/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.690196, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_myibe")
+text = "Vampire"
+
+[node name="PlayerGoalLabel" type="Label" parent="PlayerHud/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.690196, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_myibe")
+text = "Goal
+"
+
+[node name="PlayerGoal" type="Label" parent="PlayerHud/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.690196, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_myibe")
+text = "Goal
+"
+
+[node name="PlayerAbilityLabel" type="Label" parent="PlayerHud/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.690196, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_myibe")
+text = "Ability
+"
+
+[node name="PlayerAbility" type="Label" parent="PlayerHud/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.690196, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_myibe")
+text = "Moisdbjhsd Hkjsdhre HJlkjiudsf huayewer hkcuhslkd bhrsjdn vbwuyegfwj sdkuhsd ushd hgiuasdyjk  vagudowie biwocijwbelkjds hbwiuhf.
+"
+autowrap_mode = 3
+justification_flags = 43

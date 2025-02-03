@@ -1,16 +1,20 @@
-[gd_scene load_steps=14 format=3 uid="uid://bju0vyee4sfvs"]
+[gd_scene load_steps=15 format=3 uid="uid://bju0vyee4sfvs"]
 
 [ext_resource type="Texture2D" uid="uid://c6vg4oagcsokc" path="res://assets/question_mark.png" id="1_krj8b"]
 [ext_resource type="Script" path="res://scripts/question_mark_sprite.gd" id="2_u2x53"]
 [ext_resource type="Texture2D" uid="uid://bitj45m11pwdn" path="res://assets/green.png" id="3_tp5kw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scj14"]
+content_margin_left = 30.0
+content_margin_top = 30.0
+content_margin_right = 30.0
+content_margin_bottom = 30.0
 bg_color = Color(0.6, 0.603922, 0.576471, 0)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
-border_color = Color(0.8, 0.8, 0.8, 0)
+border_color = Color(0.909804, 0.25098, 0.607843, 0.815686)
 border_blend = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s48je"]
@@ -74,12 +78,20 @@ _data = {
 "RESET": SubResource("Animation_1kctv")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_y6qnv"]
+properties/0/path = NodePath("Panel/QMark/AnimationPlayer:current_animation")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Panel/QMark:texture_repeat")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="QuestionMarkSprite" type="VBoxContainer"]
 clip_contents = true
 layout_direction = 1
 offset_top = 1.0
-offset_right = 143.0
-offset_bottom = 142.0
+offset_right = 286.0
+offset_bottom = 255.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("2_u2x53")
@@ -104,6 +116,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -114,15 +128,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AvatarTxt" type="TextureRect" parent="Panel"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.214
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 7.0
-offset_top = -5.174
-offset_right = -3.0
-offset_bottom = 1.0
+offset_left = 35.0
+offset_top = 0.644001
+offset_right = -35.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
@@ -131,15 +146,15 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="QMark" type="TextureRect" parent="Panel"]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.19
 anchor_right = 1.0
 anchor_bottom = 0.913
-offset_top = 0.0599976
-offset_right = 1.0
-offset_bottom = -0.0380096
+offset_left = 12.0
+offset_top = 3.74
+offset_right = -11.0
+offset_bottom = 9.09801
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
@@ -151,3 +166,6 @@ libraries = {
 "": SubResource("AnimationLibrary_p3rvk")
 }
 autoplay = "QMark"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_y6qnv")

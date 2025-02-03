@@ -20,17 +20,16 @@ func init(player):
 	if player.name:
 		if player.name != "":
 			set_sprite_name(player.name)
-	print("// TRY UPDATE BORDER // ")
-	print("Active player: " , GameState.active_player.id)
-	print("Player: ", player.id)
 	pl_id = player.id
 	if GameState.active_player.id == player.id:
-		print("mphke")
 		var themeBox : StyleBoxFlat = StyleBoxFlat.new()
-		themeBox.border_color = "#e73da7"
-		panel.theme_override_styles["panel"] = themeBox
+		themeBox.border_color = Color("#e73da7")
+		themeBox.bg_color = Color("#999a9300")
+		themeBox.set_border_width_all(5)
+		themeBox.border_blend = true
+		panel.add_theme_stylebox_override("panel", themeBox)
+		#panel.theme_override_styles["panel"] = themeBox
 		#cccccc
-	print("-- STOP UPDATE BORDER --")
 	
 
 func use_texture(color : String):

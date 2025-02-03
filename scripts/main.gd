@@ -3,6 +3,7 @@ extends Node2D
 @onready var dmg_board_sprite : PackedScene =  preload("res://scenes/player_dmg_board.tscn")
 @onready var multiplayer_controller: MultiplayerController = $CanvasLayer/MultiplayerController
 
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
 
 @onready var main_menu: MainMenu = $CanvasLayer/MainMenu
 
@@ -33,7 +34,8 @@ func _on_new_game():
 	
 func _on_start_game(id):
 	play_scene = play_scene_pack.instantiate()
-	add_child(play_scene)
+	
+	canvas_layer.add_child(play_scene)
 	main_menu.hide()
 	multiplayer_controller.hide()
 	#create_player.show()

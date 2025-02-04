@@ -8,6 +8,10 @@ enum GamePhase {
 
 var game_phase_status
 
+var deck = {
+	
+}
+
 var players = {}
 
 var active_player = {
@@ -19,4 +23,10 @@ var active_player = {
 	"board_scene": "", 
 	"main_scene": "",
 	"character": "",
+}
+
+var game_settings = {
+	"vampires_count": 0,
+	"warewolves_count": 0,
+	"humans_count"	: 0,
 }

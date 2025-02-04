@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://0bb1smwkkxom"]
+[gd_scene load_steps=6 format=3 uid="uid://0bb1smwkkxom"]
 
 [ext_resource type="PackedScene" uid="uid://b17kffupxhkqr" path="res://scenes/create_player.tscn" id="1_4nsor"]
 [ext_resource type="Script" path="res://scripts/lobby.gd" id="1_mvn21"]
 [ext_resource type="PackedScene" uid="uid://bju0vyee4sfvs" path="res://scenes/question_mark_sprite.tscn" id="3_k5xar"]
+[ext_resource type="Script" path="res://scripts/game_settings.gd" id="4_asuex"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2byoh"]
 bg_color = Color(0.426789, 0.542601, 0.901927, 1)
@@ -119,5 +120,132 @@ offset_bottom = 899.0
 theme_override_font_sizes/font_size = 50
 text = "START GAME"
 
+[node name="GameSettings" type="Panel" parent="."]
+offset_left = 1293.0
+offset_top = 185.0
+offset_right = 1866.0
+offset_bottom = 483.0
+script = ExtResource("4_asuex")
+
+[node name="Label" type="Label" parent="GameSettings"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -130.5
+offset_right = 128.5
+offset_bottom = 52.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Game Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameSettings"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -209.5
+offset_top = -213.0
+offset_right = 210.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameSettings/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GameSettings/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Vampires: "
+
+[node name="Container" type="Container" parent="GameSettings/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="VampDec" type="Button" parent="GameSettings/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "<"
+
+[node name="VampiresCount" type="Label" parent="GameSettings/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "2"
+horizontal_alignment = 1
+
+[node name="VampInc" type="Button" parent="GameSettings/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = ">"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="GameSettings/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GameSettings/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Warewoolfs: "
+
+[node name="Container" type="Container" parent="GameSettings/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="WareDec" type="Button" parent="GameSettings/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "<"
+
+[node name="WarewolvesCount" type="Label" parent="GameSettings/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "2"
+horizontal_alignment = 1
+
+[node name="WareInc" type="Button" parent="GameSettings/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = ">"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="GameSettings/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GameSettings/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Humans:"
+
+[node name="Container" type="Container" parent="GameSettings/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(97, 0)
+layout_mode = 2
+
+[node name="HumansDec" type="Button" parent="GameSettings/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "<"
+
+[node name="HumansCount" type="Label" parent="GameSettings/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "2"
+horizontal_alignment = 1
+
+[node name="HumansInc" type="Button" parent="GameSettings/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = ">"
+
 [connection signal="pressed" from="Back" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="StartGameButton" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="GameSettings/VBoxContainer/HBoxContainer/VampDec" to="GameSettings" method="_on_vamp_dec_pressed"]
+[connection signal="pressed" from="GameSettings/VBoxContainer/HBoxContainer/VampInc" to="GameSettings" method="_on_vamp_inc_pressed"]
+[connection signal="pressed" from="GameSettings/VBoxContainer/HBoxContainer2/WareDec" to="GameSettings" method="_on_ware_dec_pressed"]
+[connection signal="pressed" from="GameSettings/VBoxContainer/HBoxContainer2/WareInc" to="GameSettings" method="_on_ware_inc_pressed"]
+[connection signal="pressed" from="GameSettings/VBoxContainer/HBoxContainer3/HumansDec" to="GameSettings" method="_on_humans_dec_pressed"]
+[connection signal="pressed" from="GameSettings/VBoxContainer/HBoxContainer3/HumansInc" to="GameSettings" method="_on_humans_inc_pressed"]

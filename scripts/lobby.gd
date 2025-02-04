@@ -7,6 +7,7 @@ var question_mark_sprite : PackedScene = preload("res://scenes/question_mark_spr
 @onready var lobby_id: Label = $GridContainer/LobbyId
 @onready var start_game_button: Button = $StartGameButton
 @onready var players_in_lobby: Label = $GridContainer/PlayersInLobby
+@onready var game_settings: GameSettings = $GameSettings
 
 @export var q_marks = {}
 
@@ -23,7 +24,6 @@ func lobby_init(id : String):
 	lobbyId = id
 	lobby_id.text = id
 	
-	print("multiplayer is server: ", multiplayer.is_server(), " / ", multiplayer.get_unique_id())
 	if not multiplayer.is_server():
 		start_game_button.hide()
 
@@ -52,7 +52,7 @@ func share_avatar(player):
 
 @rpc("any_peer")
 func lobby_add_player(player):
-	print("Lobby: adding player: " , player)
+	#print("Lobby: adding player: " , player)
 	
 	GameState.players[player.id] = (player)
 	if multiplayer.is_server():
@@ -69,6 +69,8 @@ func lobby_add_player(player):
 			lobby_add_player.rpc(GameState.players[pl])
 	
 	players_in_lobby.text = str(GameState.players.size())
+	game_settings.load_default_composition()
+	
 
 
 
@@ -80,12 +82,9 @@ func _on_start_game_pressed() -> void:
 	start_game.rpc()
 
 func set_temp_name(player):
-	print("edw")
 	if not player.name == null:
-		print("edw edw")
 		if player.name == "":
 			var name = "Player_" + str(GameState.players.size())
-			print("new name: ", name)
 			player.name = name
 			GameState.players[player.id].name = name
 			if GameState.active_player.id == player.id:

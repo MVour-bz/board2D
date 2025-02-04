@@ -1,8 +1,47 @@
-[gd_scene load_steps=11 format=3 uid="uid://buama3fol0eb6"]
+[gd_scene load_steps=30 format=3 uid="uid://buama3fol0eb6"]
 
 [ext_resource type="PackedScene" uid="uid://d3ev876e5fbof" path="res://scenes/health_board.tscn" id="1_2f02m"]
 [ext_resource type="Script" path="res://scripts/play_scene.gd" id="1_uvvkh"]
 [ext_resource type="Texture2D" uid="uid://7c2bc3a67fv7" path="res://assets/mix_bf_op.png" id="3_8w2fw"]
+[ext_resource type="Script" path="res://scripts/player_hud.gd" id="3_kph0c"]
+[ext_resource type="Texture2D" uid="uid://cvyncwsj3uwlt" path="res://assets/wrwlf.png" id="5_0g4pv"]
+[ext_resource type="Texture2D" uid="uid://cdto2b20p1h8l" path="res://assets/wrwlf_ligh.png" id="6_ee57v"]
+
+[sub_resource type="Animation" id="Animation_q7a4v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(363, 806)]
+}
+
+[sub_resource type="Animation" id="Animation_en44x"]
+resource_name = "ToggleHud"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.4, 0.566667, 0.733333, 0.966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(363, 820), Vector2(363, 850), Vector2(363, 900), Vector2(363, 1000), Vector2(363, 1050), Vector2(363, 1070)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vrv0s"]
+_data = {
+"RESET": SubResource("Animation_q7a4v"),
+"ToggleHud": SubResource("Animation_en44x")
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bqq6g"]
 atlas = ExtResource("3_8w2fw")
@@ -23,6 +62,54 @@ region = Rect2(38, 38, 38, 38)
 [sub_resource type="AtlasTexture" id="AtlasTexture_3hvic"]
 atlas = ExtResource("3_8w2fw")
 region = Rect2(0, 76, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_auk84"]
+atlas = ExtResource("5_0g4pv")
+region = Rect2(0, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpseq"]
+atlas = ExtResource("5_0g4pv")
+region = Rect2(38, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ttyyc"]
+atlas = ExtResource("5_0g4pv")
+region = Rect2(0, 38, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lc67g"]
+atlas = ExtResource("5_0g4pv")
+region = Rect2(38, 38, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnak8"]
+atlas = ExtResource("5_0g4pv")
+region = Rect2(0, 76, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bs7w7"]
+atlas = ExtResource("5_0g4pv")
+region = Rect2(38, 76, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydgpm"]
+atlas = ExtResource("6_ee57v")
+region = Rect2(0, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sesht"]
+atlas = ExtResource("6_ee57v")
+region = Rect2(38, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jangc"]
+atlas = ExtResource("6_ee57v")
+region = Rect2(0, 38, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78o03"]
+atlas = ExtResource("6_ee57v")
+region = Rect2(38, 38, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8oylf"]
+atlas = ExtResource("6_ee57v")
+region = Rect2(0, 76, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ualbj"]
+atlas = ExtResource("6_ee57v")
+region = Rect2(38, 76, 38, 38)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dv3dq"]
 animations = [{
@@ -52,7 +139,48 @@ animations = [{
 "texture": SubResource("AtlasTexture_bs1hb")
 }],
 "loop": true,
-"name": &"default",
+"name": &"vampire",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_auk84")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cpseq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ttyyc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lc67g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnak8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bs7w7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydgpm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sesht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jangc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78o03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8oylf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ualbj")
+}],
+"loop": true,
+"name": &"warewolf",
 "speed": 5.0
 }]
 
@@ -61,6 +189,9 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_bottom = 10
 border_color = Color(0.792516, 0.223814, 0.452169, 1)
 border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pmsmx"]
+bg_color = Color(0.064764, 0.234161, 0.367009, 1)
 
 [node name="PlayScene" type="Node2D"]
 script = ExtResource("1_uvvkh")
@@ -71,101 +202,193 @@ offset_top = 11.0
 offset_right = 152.0
 offset_bottom = 154.0
 
-[node name="Panel" type="Panel" parent="."]
-custom_minimum_size = Vector2(50, 50)
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 513.0
-offset_top = 5.0
-offset_right = 1190.0
-offset_bottom = 62.0
-grow_horizontal = 2
-
-[node name="PlayerLabel" type="Label" parent="Panel"]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 92.0
-grow_vertical = 2
-theme_override_font_sizes/font_size = 25
-text = "Player"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PlayerInfo" type="Label" parent="Panel"]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -546.0
-grow_horizontal = 0
-grow_vertical = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="PlayerHud" type="Panel" parent="."]
 custom_minimum_size = Vector2(50, 50)
-offset_left = 361.0
-offset_top = 733.0
-offset_right = 1528.0
-offset_bottom = 990.0
+offset_left = 363.0
+offset_top = 806.0
+offset_right = 1530.0
+offset_bottom = 1063.0
+script = ExtResource("3_kph0c")
 
-[node name="Panel" type="AnimatedSprite2D" parent="PlayerHud"]
+[node name="ToggleHudButton" type="Button" parent="PlayerHud"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.019
+anchor_top = 0.004
+anchor_right = 0.019
+anchor_bottom = 0.004
+offset_left = -0.173002
+offset_top = -20.028
+offset_right = 51.827
+offset_bottom = -0.028
+toggle_mode = true
+text = "HIDE"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerHud/ToggleHudButton"]
+libraries = {
+"": SubResource("AnimationLibrary_vrv0s")
+}
+
+[node name="CharacterSprite" type="AnimatedSprite2D" parent="PlayerHud"]
 position = Vector2(136.875, 130.375)
 scale = Vector2(5.26974, 5.55921)
 sprite_frames = SubResource("SpriteFrames_dv3dq")
-autoplay = "default"
-frame_progress = 0.404009
+animation = &"warewolf"
+autoplay = "vampire"
+frame_progress = 0.308774
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerHud"]
-clip_contents = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.239075
-anchor_top = 0.0622568
-anchor_right = 0.718081
-anchor_bottom = 1.11284
-metadata/_edit_use_anchors_ = true
-
-[node name="PlayerName" type="Label" parent="PlayerHud/VBoxContainer"]
+[node name="PlayerName" type="Label" parent="PlayerHud"]
 layout_mode = 2
+offset_left = 425.0
+offset_top = 18.0
+offset_right = 833.0
+offset_bottom = 51.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_myibe")
 text = "Name"
 
-[node name="PlayerScpecies" type="Label" parent="PlayerHud/VBoxContainer"]
+[node name="PlayerScpecies" type="Label" parent="PlayerHud"]
 layout_mode = 2
+offset_left = 279.0
+offset_top = 18.0
+offset_right = 401.0
+offset_bottom = 51.0
 theme_override_colors/font_color = Color(0.690196, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_myibe")
 text = "Vampire"
 
-[node name="PlayerGoalLabel" type="Label" parent="PlayerHud/VBoxContainer"]
+[node name="PlayerGoalLabel" type="Label" parent="PlayerHud"]
 layout_mode = 2
+offset_left = 279.0
+offset_top = 53.0
+offset_right = 838.0
+offset_bottom = 86.0
 theme_override_colors/font_color = Color(0.690196, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_myibe")
 text = "Goal
 "
 
-[node name="PlayerGoal" type="Label" parent="PlayerHud/VBoxContainer"]
+[node name="PlayerGoal" type="Label" parent="PlayerHud"]
 layout_mode = 2
+offset_left = 279.0
+offset_top = 89.0
+offset_right = 838.0
+offset_bottom = 122.0
 theme_override_colors/font_color = Color(0.690196, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_myibe")
 text = "Goal
 "
 
-[node name="PlayerAbilityLabel" type="Label" parent="PlayerHud/VBoxContainer"]
+[node name="PlayerAbilityLabel" type="Label" parent="PlayerHud"]
 layout_mode = 2
+offset_left = 280.0
+offset_top = 128.0
+offset_right = 839.0
+offset_bottom = 161.0
 theme_override_colors/font_color = Color(0.690196, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_myibe")
 text = "Ability
 "
 
-[node name="PlayerAbility" type="Label" parent="PlayerHud/VBoxContainer"]
+[node name="PlayerAbility" type="Label" parent="PlayerHud"]
 layout_mode = 2
+offset_left = 279.0
+offset_top = 170.0
+offset_right = 838.0
+offset_bottom = 245.0
 theme_override_colors/font_color = Color(0.690196, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_myibe")
 text = "Moisdbjhsd Hkjsdhre HJlkjiudsf huayewer hkcuhslkd bhrsjdn vbwuyegfwj sdkuhsd ushd hgiuasdyjk  vagudowie biwocijwbelkjds hbwiuhf.
 "
 autowrap_mode = 3
 justification_flags = 43
+
+[node name="Panel" type="Panel" parent="PlayerHud"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -288.0
+offset_top = 11.0
+offset_right = -22.0
+offset_bottom = 171.0
+grow_horizontal = 0
+
+[node name="HealthLabel" type="Label" parent="PlayerHud/Panel"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 10.0
+offset_right = 91.0
+offset_bottom = 39.0
+theme_override_font_sizes/font_size = 20
+text = "Health:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerHealth" type="Label" parent="PlayerHud/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -38.0
+offset_top = 3.0
+offset_right = 6.0
+offset_bottom = 45.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(9.3855e-07, 0.681845, 2.31028e-06, 1)
+theme_override_font_sizes/font_size = 30
+text = "14"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DamageLabel" type="Label" parent="PlayerHud/Panel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 12.0
+offset_top = -24.0
+offset_right = 161.0
+offset_bottom = 4.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Damage Taken:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerDamage" type="Label" parent="PlayerHud/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.477
+anchor_top = 0.728
+anchor_right = 0.477
+anchor_bottom = 0.728
+offset_left = -85.882
+offset_top = -34.48
+offset_right = 69.118
+offset_bottom = 34.52
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.692458, 1.37895e-05, 7.5084e-06, 1)
+theme_override_font_sizes/font_size = 50
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AbilityButton" type="Button" parent="PlayerHud"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -285.0
+offset_top = -70.0
+offset_right = -25.0
+offset_bottom = -17.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_pmsmx")
+text = "Use Ability"
+
+[connection signal="toggled" from="PlayerHud/ToggleHudButton" to="PlayerHud" method="_on_toggle_hud_button_toggled"]

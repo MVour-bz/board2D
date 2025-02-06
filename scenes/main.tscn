@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvxhbf5vjbe43"]
+[gd_scene load_steps=6 format=3 uid="uid://cvxhbf5vjbe43"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_vyasj"]
 [ext_resource type="PackedScene" uid="uid://da674sadmsatf" path="res://scenes/multiplayer_controller.tscn" id="5_qihki"]
 [ext_resource type="PackedScene" uid="uid://bxjqqvngj2p3i" path="res://scenes/side_menu.tscn" id="5_snh2g"]
 [ext_resource type="PackedScene" uid="uid://r6rwa20wgurn" path="res://scenes/main_menu.tscn" id="6_yjbwe"]
+
+[sub_resource type="TileSet" id="TileSet_wwhxm"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_vyasj")
@@ -34,6 +36,7 @@ size_flags_vertical = 4
 metadata/_edit_use_anchors_ = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="CanvasLayer"]
+tile_set = SubResource("TileSet_wwhxm")
 
 [node name="SideMenu" parent="CanvasLayer" instance=ExtResource("5_snh2g")]
 visible = false

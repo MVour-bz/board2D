@@ -33,19 +33,31 @@ var active_player = {
 	"board_scene": "", 
 	"main_scene": "",
 	"character": "",
+	"hidden": true,
+	"dmg": 0
 }
 	#"dmg": "",
 	#"max_dmg": "",}
 
 var game_settings_default = {
-	"players" = {
+	"players" : {
 		4 : {"vampires_count": 2, "warewolves_count": 2, "humans_count": 0},
 		5 : {"vampires_count": 2, "warewolves_count": 2, "humans_count": 1},
 		6 : {"vampires_count": 2, "warewolves_count": 2, "humans_count": 2},
 		7 : {"vampires_count": 2, "warewolves_count": 2, "humans_count": 3},
 		8 : {"vampires_count": 3, "warewolves_count": 3, "humans_count": 2}
+	},
+	"chairs_config" : {
+		2 : ["slot1", "slot4"],
+		3 : ["slot1", "slot4", "slot7"],
+		4 : ["slot1", "slot2", "slot4", "slot7"],
+		5 : ["slot1", "slot2", "slot4", "slot6", "slot8"],
+		6 : ["slot1", "slot2", "slot4", "slot5", "slot6", "slot8"],
+		7 : ["slot1", "slot2", "slot3", "slot4", "slot5", "slot6", "slot8"],
+		8 : ["slot1", "slot2", "slot3", "slot4", "slot5", "slot6", "slot7", "slot8"],
 	}
 }
+
 
 var deck = {
 	"characters": {
@@ -66,12 +78,26 @@ var deck = {
 		
 	],
 	"blue_cards" : [
+		{"id": "bc1", "title": "Some Blue Card", "text": "Some BlueCard Text"},
+		{"id": "bc2", "title": "Some Blue Card", "text": "Some BlueCard Text"},
+		{"id": "bc3", "title": "Some Blue Card", "text": "Some BlueCard Text"},
+		{"id": "bc4", "title": "Some Blue Card", "text": "Some BlueCard Text"},
+		{"id": "bc5", "title": "Some Blue Card", "text": "Some BlueCard Text"}
+	],
+	"green_cards" : [
+		{"id": "gc1", "title": "Some Green Card", "text": "Some GreenCard Text"},
+		{"id": "gc2", "title": "Some Green Card", "text": "Some GreenCard Text"},
+		{"id": "gc3", "title": "Some Green Card", "text": "Some GreenCard Text"},
+		{"id": "gc4", "title": "Some Green Card", "text": "Some GreenCard Text"},
+		{"id": "gc5", "title": "Some Green Card", "text": "Some GreenCard Text"}
 		
 	],
 	"red_cards" : [
-		
-	],
-	"green_cards" : [
+		{"id": "rc1", "title": "Some Red Card", "text": "Some RedCard Text"},
+		{"id": "rc2", "title": "Some Red Card", "text": "Some RedCard Text"},
+		{"id": "rc3", "title": "Some Red Card", "text": "Some RedCard Text"},
+		{"id": "rc4", "title": "Some Red Card", "text": "Some RedCard Text"},
+		{"id": "rc5", "title": "Some Red Card", "text": "Some RedCard Text"}
 		
 	]
 	

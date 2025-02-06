@@ -1,13 +1,18 @@
 class_name PlayScene extends Node2D
 
 @onready var damage_board: DamageBoard = $DamageBoard
-@onready var player_hud: PlayerHud = $PlayerHud
-
+@onready var players_slots: Node2D = $PlayersSlots
+@onready var player_hud: PlayerHud = $Hud/PlayerHud
+@onready var decks_container: HBoxContainer = $DecksContainer
+@onready var deck_scn : PackedScene = preload("res://scenes/card_deck.tscn")
 
 func _ready():
 	suffle_deck_all.rpc_id(1)
+	build_decks.rpc_id(1)
 	deal_cards_characters.rpc_id(1)
 	
+	decide_players_turn.rpc_id(1)
+	players_slots.sit_players.rpc(GameState.game_info.players_turn)
 
 func play():
 	pass
@@ -24,7 +29,6 @@ func deal_cards_characters():
 	all_chars.append_array(GameState.deck.characters.warewolves)
 	all_chars.append_array(GameState.deck.characters.humans)
 	all_chars.shuffle()
-	print("all chars: ", all_chars)
 	var created_vamps = 0
 	var created_ware = 0
 	var created_humans = 0
@@ -44,17 +48,43 @@ func deal_cards_characters():
 					created_humans += 1
 					break
 			character = all_chars.pop_front()
-		set_character.rpc_id(GameState.players[pl].id, character)
+		set_character.rpc(GameState.players[pl].id, character)
 		GameState.players[pl].character = character
 
 
 @rpc("authority", "call_local")
-func set_character(character):
-	print("Character: ", character)
-	GameState.active_player.character = character
-	player_hud.init(character.name, character.species, character.goal, character.ability, character.health, 0)
+func set_character(pl_id, character):
+	if GameState.active_player.id == pl_id:
+		GameState.active_player.character = character
+		player_hud.init(character.name, character.species, character.goal, character.ability, character.health, 0)
+	GameState.players[pl_id].character = character
 #func 
 
+
+@rpc("call_local")
+func build_decks():
+	if not multiplayer.is_server(): return
+	for pl in GameState.players.values():
+		print("pl: ", pl)
+		rearrange_decks.rpc_id(pl.id, "red_cards",Global.deck["red_cards"])
+		rearrange_decks.rpc_id(pl.id, "green_cards",Global.deck["green_cards"])
+		rearrange_decks.rpc_id(pl.id, "blue_cards",Global.deck["blue_cards"])
+	attach_deck("red_cards")
+	attach_deck("blue_cards")
+	attach_deck("green_cards")
+	
+func attach_deck(card_type):
+	var new_deck : CardDeck = deck_scn.instantiate()
+	decks_container.add_child(new_deck)
+	new_deck.add_cards(card_type)
+	new_deck.init()
+
+@rpc("any_peer", "call_remote")
+func rearrange_decks(card_type : String , playing_deck : Array):
+	if multiplayer.is_server(): return
+	Global.deck[card_type] = playing_deck
+	attach_deck(card_type)
+	
 
 @rpc("authority", "call_local")
 func suffle_deck_all():
@@ -77,3 +107,10 @@ func suffle_deck_characters():
 	GameState.deck["characters"].warewolves.shuffle()
 	GameState.deck["characters"].humans.shuffle()
 	
+@rpc("authority", "call_local")
+func decide_players_turn():
+	if not multiplayer.is_server():
+		return
+	for pl in GameState.players:
+		GameState.game_info.players_turn.append(GameState.players[pl].id)
+	GameState.game_info.players_turn.shuffle()

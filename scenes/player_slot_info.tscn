@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://brg35g0vin0lw"]
+
+[ext_resource type="Texture2D" uid="uid://bitj45m11pwdn" path="res://assets/green.png" id="1_1blg7"]
+[ext_resource type="Script" path="res://scripts/player_slot_info.gd" id="1_6iak5"]
+
+[node name="PlayerSlotInfo" type="Button"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.5
+offset_top = -83.0
+offset_right = 132.5
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6iak5")
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 52.0
+grow_horizontal = 2
+text = "NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerPawn" type="Sprite2D" parent="."]
+position = Vector2(38.5, 97)
+texture = ExtResource("1_1blg7")
+
+[node name="DamageLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 67.0
+offset_right = 157.0
+offset_bottom = 98.0
+text = "DMG:"
+
+[node name="Damage" type="Label" parent="DamageLabel"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 1.0
+offset_right = 137.0
+offset_bottom = 28.0
+text = "0"
+horizontal_alignment = 1
+
+[node name="SpeciesLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 83.5
+offset_top = 105.0
+offset_right = 156.5
+offset_bottom = 142.0
+text = "Species:"
+
+[node name="Species" type="Label" parent="SpeciesLabel"]
+layout_mode = 0
+offset_left = 83.0
+offset_right = 153.0
+offset_bottom = 23.0
+text = "Unknown"

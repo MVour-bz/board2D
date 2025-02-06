@@ -1,11 +1,14 @@
-[gd_scene load_steps=30 format=3 uid="uid://buama3fol0eb6"]
+[gd_scene load_steps=34 format=3 uid="uid://buama3fol0eb6"]
 
 [ext_resource type="PackedScene" uid="uid://d3ev876e5fbof" path="res://scenes/health_board.tscn" id="1_2f02m"]
 [ext_resource type="Script" path="res://scripts/play_scene.gd" id="1_uvvkh"]
 [ext_resource type="Texture2D" uid="uid://7c2bc3a67fv7" path="res://assets/mix_bf_op.png" id="3_8w2fw"]
+[ext_resource type="Script" path="res://scripts/hud.gd" id="3_dot8f"]
 [ext_resource type="Script" path="res://scripts/player_hud.gd" id="3_kph0c"]
 [ext_resource type="Texture2D" uid="uid://cvyncwsj3uwlt" path="res://assets/wrwlf.png" id="5_0g4pv"]
 [ext_resource type="Texture2D" uid="uid://cdto2b20p1h8l" path="res://assets/wrwlf_ligh.png" id="6_ee57v"]
+[ext_resource type="Script" path="res://scripts/players_slots.gd" id="7_nceq5"]
+[ext_resource type="PackedScene" uid="uid://cg8cceqjwmtk4" path="res://scenes/card_deck.tscn" id="9_edp6p"]
 
 [sub_resource type="Animation" id="Animation_q7a4v"]
 length = 0.001
@@ -21,6 +24,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(363, 806)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["HIDE"]
+}
 
 [sub_resource type="Animation" id="Animation_en44x"]
 resource_name = "ToggleHud"
@@ -34,7 +49,31 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.133333, 0.4, 0.566667, 0.733333, 0.966667),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(363, 820), Vector2(363, 850), Vector2(363, 900), Vector2(363, 1000), Vector2(363, 1050), Vector2(363, 1070)]
+"values": [Vector2(363, 800), Vector2(363, 850), Vector2(363, 900), Vector2(363, 1000), Vector2(363, 1050), Vector2(363, 1070)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.933333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": ["HIDE", "SHOW"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("..:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.566667, 0.733333, 0.966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(363, 850), Vector2(363, 900), Vector2(363, 1000), Vector2(363, 1050), Vector2(363, 1070)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vrv0s"]
@@ -193,6 +232,8 @@ border_blend = true
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pmsmx"]
 bg_color = Color(0.064764, 0.234161, 0.367009, 1)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_lywnp"]
+
 [node name="PlayScene" type="Node2D"]
 script = ExtResource("1_uvvkh")
 
@@ -201,35 +242,57 @@ offset_left = 19.0
 offset_top = 11.0
 offset_right = 152.0
 offset_bottom = 154.0
+metadata/_edit_use_anchors_ = true
 
-[node name="PlayerHud" type="Panel" parent="."]
-custom_minimum_size = Vector2(50, 50)
+[node name="Hud" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 363.0
 offset_top = 806.0
-offset_right = 1530.0
-offset_bottom = 1063.0
-script = ExtResource("3_kph0c")
+offset_right = 1497.0
+offset_bottom = 1075.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_dot8f")
 
-[node name="ToggleHudButton" type="Button" parent="PlayerHud"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.019
-anchor_top = 0.004
-anchor_right = 0.019
-anchor_bottom = 0.004
-offset_left = -0.173002
-offset_top = -20.028
-offset_right = 51.827
-offset_bottom = -0.028
-toggle_mode = true
-text = "HIDE"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerHud/ToggleHudButton"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Hud"]
+root_node = NodePath("../ToggleHudButton")
 libraries = {
 "": SubResource("AnimationLibrary_vrv0s")
 }
 
-[node name="CharacterSprite" type="AnimatedSprite2D" parent="PlayerHud"]
+[node name="ToggleHudButton" type="Button" parent="Hud"]
+layout_mode = 2
+anchor_left = 0.0141093
+anchor_top = -0.115242
+anchor_right = 0.0864198
+size_flags_horizontal = 0
+size_flags_vertical = 0
+toggle_mode = true
+text = "HIDE"
+metadata/_edit_use_anchors_ = true
+
+[node name="ToggleCardsButton" type="Button" parent="Hud"]
+layout_mode = 2
+anchor_left = 0.0987654
+anchor_top = -0.115242
+anchor_right = 0.171076
+size_flags_horizontal = 0
+size_flags_vertical = 0
+toggle_mode = true
+text = "CARDS"
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayerHud" type="Panel" parent="Hud"]
+z_index = 2
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+offset_right = 1134.0
+offset_bottom = 269.0
+script = ExtResource("3_kph0c")
+
+[node name="CharacterSprite" type="AnimatedSprite2D" parent="Hud/PlayerHud"]
 position = Vector2(136.875, 130.375)
 scale = Vector2(5.26974, 5.55921)
 sprite_frames = SubResource("SpriteFrames_dv3dq")
@@ -237,64 +300,72 @@ animation = &"warewolf"
 autoplay = "vampire"
 frame_progress = 0.308774
 
-[node name="PlayerName" type="Label" parent="PlayerHud"]
+[node name="PlayerName" type="Label" parent="Hud/PlayerHud"]
 layout_mode = 2
-offset_left = 425.0
-offset_top = 18.0
-offset_right = 833.0
-offset_bottom = 51.0
+anchor_left = 0.364182
+anchor_top = 0.0700389
+anchor_right = 0.713796
+anchor_bottom = 0.198444
 theme_override_styles/normal = SubResource("StyleBoxFlat_myibe")
 text = "Name"
+metadata/_edit_use_anchors_ = true
 
-[node name="PlayerScpecies" type="Label" parent="PlayerHud"]
+[node name="PlayerScpecies" type="Label" parent="Hud/PlayerHud"]
 layout_mode = 2
-offset_left = 279.0
-offset_top = 18.0
-offset_right = 401.0
-offset_bottom = 51.0
+anchor_left = 0.239075
+anchor_top = 0.0700389
+anchor_right = 0.343616
+anchor_bottom = 0.198444
 theme_override_colors/font_color = Color(0.690196, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_myibe")
 text = "Vampire"
+metadata/_edit_use_anchors_ = true
 
-[node name="PlayerGoalLabel" type="Label" parent="PlayerHud"]
+[node name="PlayerGoalLabel" type="Label" parent="Hud/PlayerHud"]
 layout_mode = 2
-offset_left = 279.0
-offset_top = 53.0
-offset_right = 838.0
-offset_bottom = 86.0
+anchor_left = 0.239075
+anchor_top = 0.206226
+anchor_right = 0.718081
+anchor_bottom = 0.33463
+offset_right = 6.10352e-05
 theme_override_colors/font_color = Color(0.690196, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_myibe")
 text = "Goal
 "
+metadata/_edit_use_anchors_ = true
 
-[node name="PlayerGoal" type="Label" parent="PlayerHud"]
+[node name="PlayerGoal" type="Label" parent="Hud/PlayerHud"]
 layout_mode = 2
-offset_left = 279.0
-offset_top = 89.0
-offset_right = 838.0
-offset_bottom = 122.0
+anchor_left = 0.239075
+anchor_top = 0.346303
+anchor_right = 0.718081
+anchor_bottom = 0.474708
+offset_right = 6.10352e-05
 theme_override_colors/font_color = Color(0.690196, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_myibe")
 text = "Goal
 "
+metadata/_edit_use_anchors_ = true
 
-[node name="PlayerAbilityLabel" type="Label" parent="PlayerHud"]
+[node name="PlayerAbilityLabel" type="Label" parent="Hud/PlayerHud"]
 layout_mode = 2
-offset_left = 280.0
-offset_top = 128.0
-offset_right = 839.0
-offset_bottom = 161.0
+anchor_left = 0.239931
+anchor_top = 0.498054
+anchor_right = 0.718937
+anchor_bottom = 0.626459
 theme_override_colors/font_color = Color(0.690196, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_myibe")
 text = "Ability
 "
+metadata/_edit_use_anchors_ = true
 
-[node name="PlayerAbility" type="Label" parent="PlayerHud"]
+[node name="PlayerAbility" type="Label" parent="Hud/PlayerHud"]
 layout_mode = 2
-offset_left = 279.0
-offset_top = 170.0
-offset_right = 838.0
-offset_bottom = 245.0
+anchor_left = 0.239075
+anchor_top = 0.661479
+anchor_right = 0.718081
+anchor_bottom = 0.953307
+offset_right = 6.10352e-05
 theme_override_colors/font_color = Color(0.690196, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_myibe")
@@ -302,19 +373,19 @@ text = "Moisdbjhsd Hkjsdhre HJlkjiudsf huayewer hkcuhslkd bhrsjdn vbwuyegfwj sdk
 "
 autowrap_mode = 3
 justification_flags = 43
+metadata/_edit_use_anchors_ = true
 
-[node name="Panel" type="Panel" parent="PlayerHud"]
+[node name="Panel" type="Panel" parent="Hud/PlayerHud"]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -288.0
-offset_top = 11.0
-offset_right = -22.0
-offset_bottom = 171.0
+anchors_preset = -1
+anchor_left = 0.753213
+anchor_top = 0.0428016
+anchor_right = 0.981148
+anchor_bottom = 0.66537
 grow_horizontal = 0
+metadata/_edit_use_anchors_ = true
 
-[node name="HealthLabel" type="Label" parent="PlayerHud/Panel"]
+[node name="HealthLabel" type="Label" parent="Hud/PlayerHud/Panel"]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 10.0
@@ -325,7 +396,7 @@ text = "Health:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PlayerHealth" type="Label" parent="PlayerHud/Panel"]
+[node name="PlayerHealth" type="Label" parent="Hud/PlayerHud/Panel"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -341,7 +412,7 @@ text = "14"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DamageLabel" type="Label" parent="PlayerHud/Panel"]
+[node name="DamageLabel" type="Label" parent="Hud/PlayerHud/Panel"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -356,7 +427,7 @@ text = "Damage Taken:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PlayerDamage" type="Label" parent="PlayerHud/Panel"]
+[node name="PlayerDamage" type="Label" parent="Hud/PlayerHud/Panel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.477
@@ -375,20 +446,75 @@ text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AbilityButton" type="Button" parent="PlayerHud"]
+[node name="AbilityButton" type="Button" parent="Hud/PlayerHud"]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -285.0
-offset_top = -70.0
-offset_right = -25.0
-offset_bottom = -17.0
+anchors_preset = -1
+anchor_left = 0.755784
+anchor_top = 0.727626
+anchor_right = 0.978578
+anchor_bottom = 0.933852
+offset_left = 6.10352e-05
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_pmsmx")
 text = "Use Ability"
+metadata/_edit_use_anchors_ = true
 
-[connection signal="toggled" from="PlayerHud/ToggleHudButton" to="PlayerHud" method="_on_toggle_hud_button_toggled"]
+[node name="PlayerCards" type="Panel" parent="Hud"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Hud/PlayerCards"]
+sprite_frames = SubResource("SpriteFrames_lywnp")
+
+[node name="Sprite2D" type="Sprite2D" parent="Hud/PlayerCards"]
+
+[node name="PlayersSlots" type="Node2D" parent="."]
+z_index = 1
+script = ExtResource("7_nceq5")
+
+[node name="Slot1" type="Node2D" parent="PlayersSlots"]
+position = Vector2(63, 835)
+
+[node name="Slot2" type="Node2D" parent="PlayersSlots"]
+position = Vector2(62, 451)
+
+[node name="Slot3" type="Node2D" parent="PlayersSlots"]
+position = Vector2(64, 176)
+
+[node name="Slot4" type="Node2D" parent="PlayersSlots"]
+position = Vector2(534, 64)
+
+[node name="Slot5" type="Node2D" parent="PlayersSlots"]
+position = Vector2(1089, 63)
+
+[node name="Slot6" type="Node2D" parent="PlayersSlots"]
+position = Vector2(1599, 331)
+
+[node name="Slot7" type="Node2D" parent="PlayersSlots"]
+position = Vector2(1605, 566)
+
+[node name="Slot8" type="Node2D" parent="PlayersSlots"]
+position = Vector2(1599, 831)
+
+[node name="DecksContainer" type="HBoxContainer" parent="."]
+offset_left = 1304.0
+offset_top = 26.0
+offset_right = 1743.0
+offset_bottom = 264.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CardDeck" parent="DecksContainer" instance=ExtResource("9_edp6p")]
+visible = false
+layout_mode = 2
+
+[node name="CardDeck2" parent="DecksContainer" instance=ExtResource("9_edp6p")]
+visible = false
+layout_mode = 2
+
+[connection signal="toggled" from="Hud/ToggleHudButton" to="Hud" method="_on_toggle_hud_button_toggled"]

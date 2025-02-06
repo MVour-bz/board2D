@@ -23,10 +23,17 @@ var active_player = {
 	"board_scene": "", 
 	"main_scene": "",
 	"character": "",
+	"hidden": true,
+	"dmg": 0
 }
 
 var game_settings = {
 	"vampires_count": 0,
 	"warewolves_count": 0,
 	"humans_count"	: 0,
+}
+
+var game_info = {
+	"players_turn": [],
+	"round" : 0,
 }

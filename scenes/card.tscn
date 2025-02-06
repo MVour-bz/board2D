@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://hvolr10r4bgi"]
+
+[ext_resource type="Script" path="res://scripts/card.gd" id="1_jp7yq"]
+[ext_resource type="Shader" path="res://shaders/fake_3D.gdshader" id="2_q3e1r"]
+[ext_resource type="Texture2D" uid="uid://dygvses7xovyq" path="res://assets/cards/Designer(7).jpeg" id="4_6l0g7"]
+[ext_resource type="Texture2D" uid="uid://cik8t1cy6dsae" path="res://assets/cards/blue_card.jpeg" id="4_sucrh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uptu3"]
+size = Vector2(106.5, 177)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_licnr"]
+resource_local_to_scene = true
+shader = ExtResource("2_q3e1r")
+shader_parameter/rect_size = null
+shader_parameter/fov = 7.114
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
+
+[node name="Card" type="Button"]
+modulate = Color(0.701961, 0.243137, 0.27451, 0.529412)
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.212037
+anchor_right = 0.286729
+anchor_bottom = 0.359222
+offset_left = -9.0
+offset_right = 28.48
+offset_bottom = 18.04
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jp7yq")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(53.75, 88.5)
+shape = SubResource("RectangleShape2D_uptu3")
+
+[node name="Shadow" type="TextureRect" parent="."]
+modulate = Color(0.384314, 0.384314, 0.384314, 0.368627)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0462963
+anchor_top = 0.163842
+anchor_right = 1.01852
+anchor_bottom = 1.15819
+offset_bottom = 1.52588e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_6l0g7")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CardTexture" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_licnr")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -9.0
+offset_top = -24.0
+offset_right = 8.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_sucrh")
+expand_mode = 1
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

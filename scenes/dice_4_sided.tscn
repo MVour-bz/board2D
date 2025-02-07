@@ -1,0 +1,145 @@
+[gd_scene load_steps=13 format=3 uid="uid://bg6yrjrdptuum"]
+
+[ext_resource type="Texture2D" uid="uid://68ffiwxpqhmj" path="res://assets/dices/dice_4side.png" id="1_antje"]
+[ext_resource type="Script" path="res://scripts/dice_4_sided.gd" id="2_d8oth"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2epxg"]
+atlas = ExtResource("1_antje")
+region = Rect2(0, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6pupe"]
+atlas = ExtResource("1_antje")
+region = Rect2(38, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ansx"]
+atlas = ExtResource("1_antje")
+region = Rect2(0, 38, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdx47"]
+atlas = ExtResource("1_antje")
+region = Rect2(38, 38, 38, 38)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cuqa7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2epxg")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6pupe")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ansx")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kdx47")
+}],
+"loop": true,
+"name": &"4",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnlwk"]
+atlas = ExtResource("1_antje")
+region = Rect2(0, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhasx"]
+atlas = ExtResource("1_antje")
+region = Rect2(38, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdxt8"]
+atlas = ExtResource("1_antje")
+region = Rect2(0, 38, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ikehe"]
+atlas = ExtResource("1_antje")
+region = Rect2(38, 38, 38, 38)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yhfqq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pnlwk")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhasx")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdxt8")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ikehe")
+}],
+"loop": true,
+"name": &"4",
+"speed": 5.0
+}]
+
+[node name="Dice4Sided" type="AnimatedSprite2D"]
+position = Vector2(310, 218)
+scale = Vector2(3.22534, 3.26608)
+sprite_frames = SubResource("SpriteFrames_cuqa7")
+animation = &"4"
+script = ExtResource("2_d8oth")
+
+[node name="DiceShadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0.321569, 0.321569, 0.321569, 0.372549)
+show_behind_parent = true
+position = Vector2(10.4935, 9.19013)
+scale = Vector2(1.01959, 0.854033)
+skew = 0.513127
+texture = ExtResource("1_antje")
+region_enabled = true
+region_rect = Rect2(0, 0, 38, 38)
+metadata/_edit_use_anchors_ = true
+
+[node name="DiceRight" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(0.576471, 0.576471, 0.576471, 1)
+show_behind_parent = true
+position = Vector2(12.4603, -3.49636)
+rotation = 1.11527
+scale = Vector2(1.09753, 0.22669)
+skew = -0.411898
+sprite_frames = SubResource("SpriteFrames_yhfqq")
+animation = &"4"
+
+[node name="RollButton" type="Button" parent="."]
+visible = false
+offset_left = -25.3449
+offset_top = 47.0694
+offset_right = 23.6551
+offset_bottom = 78.0694
+text = "ROLL"
+
+[connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]

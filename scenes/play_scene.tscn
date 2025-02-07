@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://buama3fol0eb6"]
+[gd_scene load_steps=37 format=3 uid="uid://buama3fol0eb6"]
 
 [ext_resource type="PackedScene" uid="uid://d3ev876e5fbof" path="res://scenes/health_board.tscn" id="1_2f02m"]
 [ext_resource type="Script" path="res://scripts/play_scene.gd" id="1_uvvkh"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://cdto2b20p1h8l" path="res://assets/wrwlf_ligh.png" id="6_ee57v"]
 [ext_resource type="Script" path="res://scripts/players_slots.gd" id="7_nceq5"]
 [ext_resource type="PackedScene" uid="uid://cg8cceqjwmtk4" path="res://scenes/card_deck.tscn" id="9_edp6p"]
+[ext_resource type="PackedScene" uid="uid://by6wb574urfni" path="res://scenes/dice_6_sided.tscn" id="10_eenv0"]
+[ext_resource type="Script" path="res://scripts/dices_container.gd" id="10_mu42g"]
+[ext_resource type="PackedScene" uid="uid://bg6yrjrdptuum" path="res://scenes/dice_4_sided.tscn" id="11_rx4br"]
 
 [sub_resource type="Animation" id="Animation_q7a4v"]
 length = 0.001
@@ -487,10 +490,10 @@ position = Vector2(62, 451)
 position = Vector2(64, 176)
 
 [node name="Slot4" type="Node2D" parent="PlayersSlots"]
-position = Vector2(534, 64)
+position = Vector2(329, 57)
 
 [node name="Slot5" type="Node2D" parent="PlayersSlots"]
-position = Vector2(1089, 63)
+position = Vector2(703, 69)
 
 [node name="Slot6" type="Node2D" parent="PlayersSlots"]
 position = Vector2(1599, 331)
@@ -517,4 +520,31 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="DicesContainer" type="Panel" parent="."]
+offset_left = 870.0
+offset_top = 19.0
+offset_right = 1239.0
+offset_bottom = 292.0
+script = ExtResource("10_mu42g")
+
+[node name="Dice6Sided" parent="DicesContainer" instance=ExtResource("10_eenv0")]
+position = Vector2(79.9376, 89.875)
+scale = Vector2(2.31908, 2.26974)
+
+[node name="Dice4Sided" parent="DicesContainer" instance=ExtResource("11_rx4br")]
+position = Vector2(246, 97)
+scale = Vector2(2.89217, 2.62096)
+
+[node name="RollButton" type="Button" parent="DicesContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.238482
+anchor_top = 0.663004
+anchor_right = 0.746862
+anchor_bottom = 0.882784
+text = "Roll
+"
+metadata/_edit_use_anchors_ = true
+
 [connection signal="toggled" from="Hud/ToggleHudButton" to="Hud" method="_on_toggle_hud_button_toggled"]
+[connection signal="pressed" from="DicesContainer/RollButton" to="DicesContainer" method="_on_roll_button_pressed"]

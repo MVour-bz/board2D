@@ -6,9 +6,6 @@ extends Panel
 
 func _ready():
 	pass
-	
-	
-	
 
 
 func _on_roll_button_pressed() -> void:

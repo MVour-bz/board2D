@@ -114,3 +114,24 @@ func decide_players_turn():
 	for pl in GameState.players:
 		GameState.game_info.players_turn.append(GameState.players[pl].id)
 	GameState.game_info.players_turn.shuffle()
+
+
+func start_turns():
+	players_lock()
+	player_roll()
+	player_action()
+	player_end_turn()
+	
+func players_lock():
+	pass
+
+
+func player_roll():
+	pass
+	
+func player_action():
+	pass
+	
+func player_end_turn():
+	pass
+	

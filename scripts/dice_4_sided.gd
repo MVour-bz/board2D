@@ -27,8 +27,8 @@ func roll_animation():
 	for i in range(roll_animation_frames):
 		var animated_frame = 5
 		while animated_frame == prev_top:
-			animated_frame = randi() % 6 + 1
-			frame_right = randi() % 6 + 1
+			animated_frame = randi() % 4 + 1
+			frame_right = randi() % 4 + 1
 		self.animation = str(animated_frame)
 		dice_right.animation = str(frame_right)
 		await get_tree().process_frame

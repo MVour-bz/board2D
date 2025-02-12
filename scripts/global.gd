@@ -75,7 +75,12 @@ var deck = {
 		]
 	},
 	"locations" : [
-		
+		{"id": "l1", "name": "old_chappel", "label": "Old Chappel", "effect": "Draw: Red, Blue", "position": 0, "players": []},
+		{"id": "l2", "name": "old_chappel", "label": "Old Chappel", "effect": "Draw: Red, Blue", "position": 0, "players": []},
+		{"id": "l3", "name": "old_chappel", "label": "Old Chappel", "effect": "Draw: Red, Blue", "position": 0, "players": []},
+		{"id": "l4", "name": "old_chappel", "label": "Old Chappel", "effect": "Draw: Red, Blue", "position": 0, "players": []},
+		{"id": "l5", "name": "old_chappel", "label": "Old Chappel", "effect": "Draw: Red, Blue", "position": 0, "players": []},
+		{"id": "l6", "name": "old_chappel", "label": "Old Chappel", "effect": "Draw: Red, Blue", "position": 0, "players": []},
 	],
 	"blue_cards" : [
 		{"id": "bc1", "title": "Some Blue Card", "text": "Some BlueCard Text"},

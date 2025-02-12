@@ -5,11 +5,14 @@ class_name PlayScene extends Node2D
 @onready var player_hud: PlayerHud = $Hud/PlayerHud
 @onready var decks_container: HBoxContainer = $DecksContainer
 @onready var deck_scn : PackedScene = preload("res://scenes/card_deck.tscn")
+@onready var tile_map_layer: GameMap = $TileMapLayer
 
 func _ready():
 	suffle_deck_all.rpc_id(1)
 	build_decks.rpc_id(1)
 	deal_cards_characters.rpc_id(1)
+	deal_cards_locations.rpc_id(1)
+	
 	
 	decide_players_turn.rpc_id(1)
 	players_slots.sit_players.rpc(GameState.game_info.players_turn)
@@ -22,9 +25,15 @@ func spawn_players(players):
 
 
 @rpc("authority", "call_local")
+func deal_cards_locations():
+	if not multiplayer.is_server(): return
+	#set_locations(, GameState.dec)
+	broadcast_to_peers(set_locations, [GameState.deck["locations"]])
+
+@rpc("authority", "call_local")
 func deal_cards_characters():
 	if not multiplayer.is_server():
-		pass
+		return
 	var all_chars : Array = GameState.deck.characters.vampires
 	all_chars.append_array(GameState.deck.characters.warewolves)
 	all_chars.append_array(GameState.deck.characters.humans)
@@ -60,6 +69,11 @@ func set_character(pl_id, character):
 	GameState.players[pl_id].character = character
 #func 
 
+@rpc("authority", "call_local")
+func set_locations(locations):
+	GameState.deck["locations"] = locations
+	tile_map_layer.locations_spawn()
+
 
 @rpc("call_local")
 func build_decks():
@@ -70,8 +84,8 @@ func build_decks():
 		rearrange_decks.rpc_id(pl.id, "green_cards",Global.deck["green_cards"])
 		rearrange_decks.rpc_id(pl.id, "blue_cards",Global.deck["blue_cards"])
 	attach_deck("red_cards")
-	attach_deck("blue_cards")
 	attach_deck("green_cards")
+	attach_deck("blue_cards")
 	
 func attach_deck(card_type):
 	var new_deck : CardDeck = deck_scn.instantiate()
@@ -135,3 +149,11 @@ func player_action():
 func player_end_turn():
 	pass
 	
+
+func broadcast_to_peers(func_callable: Callable, args: Array, target_id = null):
+	if not multiplayer.is_server(): return
+	
+	if target_id:
+		func_callable.rpc_id.callv([target_id] + args)
+	else:
+		func_callable.rpc.callv(args)

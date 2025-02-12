@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxop7babawd3"]
+
+[ext_resource type="Texture2D" uid="uid://bcb4ik8mf2qyo" path="res://assets/background/chappel2.png" id="1_q58xc"]
+[ext_resource type="Script" path="res://scripts/location_sprite.gd" id="2_5kty7"]
+
+[node name="LocationSprite" type="Sprite2D"]
+texture = ExtResource("1_q58xc")
+script = ExtResource("2_5kty7")
+
+[node name="IndexLabel" type="Label" parent="."]
+offset_left = -62.0
+offset_top = -102.0
+offset_right = 63.0
+offset_bottom = -74.0
+theme_override_font_sizes/font_size = 20
+text = "Index"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LocationLabel" type="Label" parent="."]
+offset_left = -64.0
+offset_top = 69.0
+offset_right = 64.0
+offset_bottom = 92.0
+text = "Location"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -39,4 +39,5 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="Card2" parent="Cards" instance=ExtResource("2_kt8gp")]
+visible = false
 layout_mode = 2

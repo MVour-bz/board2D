@@ -10,6 +10,14 @@ var question_mark_sprite : PackedScene = preload("res://scenes/question_mark_spr
 @onready var game_settings: GameSettings = $GameSettings
 
 @export var q_marks = {}
+@onready var vamp_dec: Button = $GameSettings/VBoxContainer/HBoxContainer/VampDec
+@onready var vamp_inc: Button = $GameSettings/VBoxContainer/HBoxContainer/VampInc
+@onready var ware_dec: Button = $GameSettings/VBoxContainer/HBoxContainer2/WareDec
+@onready var ware_inc: Button = $GameSettings/VBoxContainer/HBoxContainer2/WareInc
+@onready var humans_dec: Button = $GameSettings/VBoxContainer/HBoxContainer3/HumansDec
+@onready var humans_inc: Button = $GameSettings/VBoxContainer/HBoxContainer3/HumansInc
+
+
 
 #var question_mark_texture = preload("")
 var max_players = 8
@@ -26,7 +34,13 @@ func lobby_init(id : String):
 	
 	if not multiplayer.is_server():
 		start_game_button.hide()
-
+		vamp_dec.hide()
+		vamp_inc.hide()
+		ware_dec.hide()
+		ware_inc.hide()
+		humans_dec.hide()
+		humans_inc.hide()
+		
 
 func _on_player_joined(player):
 	pass
@@ -70,7 +84,6 @@ func lobby_add_player(player):
 	
 	players_in_lobby.text = str(GameState.players.size())
 	game_settings.load_default_composition()
-	
 
 
 
@@ -88,7 +101,7 @@ func set_temp_name(player):
 			player.name = name
 			GameState.players[player.id].name = name
 			if GameState.active_player.id == player.id:
-				GameState.active_player.name = 	name			
+				GameState.active_player.name = name
 	return player
 
 

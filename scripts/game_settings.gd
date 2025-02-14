@@ -28,50 +28,50 @@ func manage_settings_access():
 
 func load_default_composition():
 	var pl_count = GameState.players.size()
-	if pl_count >= 4 && pl_count <= 8:
+	if (pl_count >= 4 && pl_count <= 8 ) || pl_count == 2 :
 		var play_set = Global.game_settings_default["players"][pl_count]
 		vampires_count.text = str(play_set["vampires_count"])
 		humans_count.text = str(play_set["humans_count"])
 		warewolves_count.text = str(play_set["warewolves_count"])
+		
+		GameState.game_settings["vampires_count"] = play_set["vampires_count"]
+		GameState.game_settings["humans_count"] = play_set["humans_count"]
+		GameState.game_settings["warewolves_count"] = play_set["warewolves_count"]
 	else:
 		vampires_count.text = str(-1)
 		humans_count.text = str(-1)
 		warewolves_count.text = str(-1)
 		GameState.game_settings["vampires_count"] = -1
 		GameState.game_settings["humans_count"] = -1
-		GameState.game_settings["warewoolves_count"] = -1
+		GameState.game_settings["warewolves_count"] = -1
 
 
 func _on_vamp_dec_pressed() -> void:
-	vampires_count.text = str(GameState.game_settings["vampires_count"] - 1)
-	GameState.game_settings["vampires_count"] = GameState.game_settings["vampires_count"] - 1
+	GameState.game_settings["vampires_count"] -= 1
+	vampires_count.text = str(GameState.game_settings["vampires_count"])
 	
 
 func _on_vamp_inc_pressed() -> void:
-	vampires_count.text = str(GameState.game_settings["vampires_count"] + 1)
-	GameState.game_settings["vampires_count"] = GameState.game_settings["vampires_count"] + 1
+	GameState.game_settings["vampires_count"] += 1
+	vampires_count.text = str(GameState.game_settings["vampires_count"])
 	
 
 
 func _on_ware_dec_pressed() -> void:
-	warewolves_count.text = str(GameState.game_settings["warewolves_count"] - 1)
-	GameState.game_settings["warewolves_count"] = GameState.game_settings["warewolves_count"] - 1
+	GameState.game_settings["warewolves_count"] -= 1
+	warewolves_count.text = str(GameState.game_settings["warewolves_count"])
 	
 
 func _on_ware_inc_pressed() -> void:
-	warewolves_count.text = str(GameState.game_settings["warewolves_count"] + 1)
-	GameState.game_settings["warewolves_count"] = GameState.game_settings["warewolves_count"] + 1
-	pass # Replace with function body.
-
+	GameState.game_settings["warewolves_count"] += 1
+	warewolves_count.text = str(GameState.game_settings["warewolves_count"])
+	
 
 
 func _on_humans_dec_pressed() -> void:
-	humans_count.text = str(GameState.game_settings["humans_count"] - 1)
 	GameState.game_settings["humans_count"] = GameState.game_settings["humans_count"] - 1
-	pass # Replace with function body.
-
+	humans_count.text = str(GameState.game_settings["humans_count"])
 
 func _on_humans_inc_pressed() -> void:
-	humans_count.text = str(GameState.game_settings["humans_count"] + 1)
 	GameState.game_settings["humans_count"] = GameState.game_settings["humans_count"] + 1
-	pass # Replace with function body.
+	humans_count.text = str(GameState.game_settings["humans_count"])

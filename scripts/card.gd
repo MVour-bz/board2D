@@ -21,8 +21,10 @@ var card_info : Dictionary
 #@onready var collision_shape: CollisionShape2D = $Area2D/CollisionShape2D
 
 var card_types = {
-	"red_cards" : preload("res://assets/cards/Designer(7).jpeg"),
-	"green_cards" : preload("res://assets/cards/ffcard.webp"),
+	#"red_cards" : preload("res://assets/cards/Designer(7).jpeg"),
+	#"green_cards" : preload("res://assets/cards/ffcard.webp"),
+	"red_cards" : preload("res://assets/cards/red_card.webp"),
+	"green_cards" : preload("res://assets/cards/green_card.webp"),
 	"blue_cards" : preload("res://assets/cards/blue_card.jpeg"),
 }
 

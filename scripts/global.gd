@@ -34,6 +34,7 @@ var active_player = {
 	"main_scene": "",
 	"character": "",
 	"hidden": true,
+	"playing": false,
 	"dmg": 0
 }
 	#"dmg": "",
@@ -41,6 +42,7 @@ var active_player = {
 
 var game_settings_default = {
 	"players" : {
+		2 : {"vampires_count": 1, "warewolves_count": 1, "humans_count": 0},
 		4 : {"vampires_count": 2, "warewolves_count": 2, "humans_count": 0},
 		5 : {"vampires_count": 2, "warewolves_count": 2, "humans_count": 1},
 		6 : {"vampires_count": 2, "warewolves_count": 2, "humans_count": 2},

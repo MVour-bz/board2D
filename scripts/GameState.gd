@@ -24,6 +24,7 @@ var active_player = {
 	"main_scene": "",
 	"character": "",
 	"hidden": true,
+	"playing": false,
 	"dmg": 0
 }
 
